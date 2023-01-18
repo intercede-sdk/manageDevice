@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "899e581a-5a7d-408e-aaac-b463895bd534",
+		"name": "node-mongo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23877104"
+	},
+	"item": [
+		{
+			"name": "contact",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/contact",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Shiraz\",\r\n    \"lastName\": \"Esat\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/contact",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contact/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/contact/637cc075a45e81de082cbbd8",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contact",
+						"637cc075a45e81de082cbbd8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contact/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Arthur\",\r\n    \"lastName\": \"Anderson\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/contact/637cc075a45e81de082cbbd8",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contact",
+						"637cc075a45e81de082cbbd8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contact/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/contact/637cc075a45e81de082cbbd8",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"contact",
+						"637cc075a45e81de082cbbd8"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}
