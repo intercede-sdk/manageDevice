@@ -1,19 +1,20 @@
 {
-  "name": "backend",
+  "name": "get-user",
   "version": "1.0.0",
-  "description": "Node, Express and Mongo backend",
+  "description": "Basic server to server using node.js connecting to MyID Core API",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node ./index.js",
     "dev": "nodemon -e js --exec npm start"
   },
-  "author": "Emmanuel Henri",
+  "author": "Shiraz Esat",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongoose": "^6.7.2",
+    "node-fetch": "^2.6.8",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
