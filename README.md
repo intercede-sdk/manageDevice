@@ -15,4 +15,4 @@ Develop with `npm run dev`, which allows hot reloading of node.js server, and ho
 
 Run on server with `node index.js`
 
-Note that this prototype doesn't track lifetime and re-use of the authentication token. It displays the JSON response from calling the API, and will show data for a user if a valid user GUID is provided or an error message if the user GUID doesn't match an existing record.
+Note that this prototype doesn't track lifetime and re-use of the authentication token. It captures the JSON response from calling the API, and displays some of that data - including the user photo - using a simple template page if a valid user GUID is provided. Otherwise an error message is shown if the user GUID doesn't match an existing record.
