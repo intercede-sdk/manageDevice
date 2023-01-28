@@ -23,7 +23,7 @@ app.route("/contact/:contactId").get((req, res) => {
           token: response.access_token,
         }).then((img) => {
           // console.log(data); // use this to determine what can be shown
-          ejs.renderFile("userDetails.ejs", { data, img }, (_, str) => {
+          ejs.renderFile("pages/userDetails.ejs", { data, img }, (_, str) => {
             res.send(str);
           });
         })
