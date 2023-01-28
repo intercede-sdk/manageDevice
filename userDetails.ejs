@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/userDetails.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">User Details</div>
+        <div class="sidebar"><img src="data:image/png;base64, <%= img %>"></div>
+        <div class="brief">
+            <%= data.name.fullName %>
+        </div>
+        <div class="details">
+            <p>Contact email: <%= data.contact.emailAddress %>
+            </p>
+            <p>Contact phone: <%= data.contact.phoneNumber %>
+            </p>
+            <p>Employee ID: <%= data.employeeId %>
+            </p>
+        </div>
+        <div class="footer">© Demo 2022</div>
+    </div>
+</body>
+
+</html>
