@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import loki from "lokijs";
 
 const apiServer = new URL("/rest.core/api", process.env.MYID_API_SERVER);
 const clientId = process.env.MYID_API_USER;
@@ -8,8 +9,15 @@ const authServer = new URL(
   process.env.MYID_API_SERVER
 );
 
-// TODO - only authenticate if needed
+const db = new loki("getUser.db");
+const tokens = db.addCollection("tokens");
+
 export function authenticate() {
+  const validToken = tokens.findOne({ expires: { $gt: Date.now() + 5000 } });
+  if (validToken) {
+    return Promise.resolve(validToken.token.access_token);
+  }
+
   const auth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
   return fetch(authServer, {
     method: "POST",
@@ -20,6 +28,12 @@ export function authenticate() {
     },
   })
     .then((response) => response.json())
+    .then((token) => {
+      tokens.clear();
+      tokens.insert({ token, expires: Date.now() + token.expires_in * 1000 });
+      return token.access_token;
+    })
+
     .catch(() => {
       res.send("There has been an error processing this request");
       console.log("Authentication failure");

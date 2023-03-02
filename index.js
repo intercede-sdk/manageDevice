@@ -13,14 +13,14 @@ app.use(express.static("public"));
 
 app.route("/contact/:contactId").get((req, res) => {
   authenticate()
-    .then((response) =>
+    .then((token) =>
       getData({
         user: req.params.contactId,
-        token: response.access_token,
+        token,
       }).then((data) =>
         getImage({
           imageUrl: data.photo.href,
-          token: response.access_token,
+          token,
         }).then((img) => {
           // console.log(data); // use this to determine what can be shown
           ejs.renderFile("pages/userDetails.ejs", { data, img }, (_, str) => {
