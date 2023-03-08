@@ -33,10 +33,8 @@ export function authenticate() {
       tokens.insert({ token, expires: Date.now() + token.expires_in * 1000 });
       return token.access_token;
     })
-
-    .catch(() => {
-      res.send("There has been an error processing this request");
-      console.log("Authentication failure");
+    .catch((e) => {
+      console.log("Authentication failure", e);
     });
 }
 
