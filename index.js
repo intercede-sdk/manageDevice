@@ -1,8 +1,14 @@
 import express from "express";
 import bodyParser from "body-parser";
-import ejs from "ejs";
 
-import { authenticate, getData, getImage } from "./src/rest.js";
+import {
+  authenticate,
+  createUser,
+  createRequest,
+  getUser,
+  getUserDevices,
+  cancelDevice,
+} from "./src/rest.js";
 
 const app = express();
 const PORT = 3000;
@@ -11,33 +17,60 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.route("/contact/:contactId").get((req, res) => {
-  authenticate()
-    .then((token) =>
-      getData({
-        user: req.params.contactId,
-        token,
-      }).then((data) =>
-        getImage({
-          imageUrl: data.photo.href,
+app.route("/addUserRequestCard").get((_, res) => {
+  authenticate().then((token) =>
+    createUser({
+      employeeId: "123456",
+      token,
+    })
+      .then((user) =>
+        createRequest({
+          guid: user.id,
           token,
-        }).then((img) => {
-          // console.log(data); // use this to determine what can be shown
-          ejs.renderFile("pages/userDetails.ejs", { data, img }, (_, str) => {
-            res.send(str);
-          });
         })
       )
+      .then((request) =>
+        res.send(`Request created for user: ${JSON.stringify(request)}`)
+      )
+      .catch((err) => {
+        console.log(err);
+        res.send(`Unable to create request: ${err}`);
+      })
+  );
+});
+
+app.route("/cancelCard").get((_, res) => {
+  authenticate()
+    .then((token) =>
+      getUser({
+        employeeId: "123456",
+        token,
+      })
+        .then((user) =>
+          getUserDevices({
+            guid: user.id,
+            token,
+          })
+        )
+        .then((device) =>
+          cancelDevice({
+            guid: device.id,
+            token,
+          }).then((result) =>
+            res.send(`Response from cancellation: ${JSON.stringify(result)}`)
+          )
+        )
     )
     .catch((err) => {
       console.log(err);
-      res.send(`Unable to get details for ${req.params.contactId}`);
+      res.send(`Unable to cancel device: ${err}`);
     });
 });
 
-// For now, all other URLs don't show anything
 app.route("/*").get((_, res) => {
-  res.send("");
+  res.send(
+    "<a href='addUserRequestCard'>Add User / Request Card</a><br/><a href='cancelCard'>Cancel Card</a>"
+  );
 });
 
 app.listen(PORT, () => console.log(`your server is running on port ${PORT}`));
