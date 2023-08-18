@@ -75,12 +75,14 @@ This prototype makes a number of simple MyID Core API calls:
 - `POST /devices/{device-guid}/cancel`: Cancel the specified credential
 
 Error checking is minimal, and is intending to be run in dev mode (`npm run dev`) to test various behaviour of calls, and allow the hard-coded values to be changed to suit the environment this is tested against.
-`employeeId` is hard-coded to "123456"
-`group.id` user is created within is hard-coded to "BBF6B7A9-460C-48FD-AB9E-7DB163A1D65D"
-`credProfile.id` credential request uses is hard-coded to "0A5915F9-B308-4403-9C9F-F2A568E57C9B"
+`employeeId` is hard-coded to `123456`
+`group.id` user is created within is hard-coded to `BBF6B7A9-460C-48FD-AB9E-7DB163A1D65D`
+`credProfile.id` credential request uses is hard-coded to `0A5915F9-B308-4403-9C9F-F2A568E57C9B`
 
 The interface is basic, with a home page with two links:
 
 - a link to the page that adds a user, and requests a card for that user
   (MyID would need to be used to collect the card request, before using the link below)
 - a link to the page that cancels a card issued to that user
+
+Note that a couple of PowerShell scripts exist in https://github.com/intercede-sdk/sample-scripts that provide the same behaviour.
